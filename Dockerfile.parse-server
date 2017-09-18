@@ -1,0 +1,17 @@
+FROM node:8.5
+
+ENV PARSE_SERVER_HOME /parse-server
+ENV CLOUD_CODE_HOME ${PARSE_SERVER_HOME}/cloud
+ENV PORT 1337
+ENV PARSE_SERVER_VERSION 2.6.1
+
+RUN mkdir -p ${PARSE_SERVER_HOME}
+
+WORKDIR ${PARSE_SERVER_HOME}
+
+RUN git clone -b ${PARSE_SERVER_VERSION} https://github.com/InnoCells/parse-server.git .
+RUN npm install && npm run build
+
+EXPOSE ${PORT}
+
+ENTRYPOINT ["npm", "start", "--"]

@@ -1,0 +1,18 @@
+FROM node:8.5
+
+ENV PARSE_DASHBOARD_HOME /parse-dashboard
+ENV PARSE_DASHBOARD_VERSION 1.1.0
+
+RUN mkdir -p ${PARSE_DASHBOARD_HOME}
+
+WORKDIR ${PARSE_DASHBOARD_HOME}
+
+RUN git clone -b ${PARSE_DASHBOARD_VERSION} https://github.com/InnoCells/parse-dashboard.git .
+
+RUN cd ./src \
+ && npm install \
+ && npm run build \
+ && rm -rf ~/.npm \
+ && rm -rf /var/lib/apt/lists/*
+
+ENTRYPOINT ["npm", "run", "dashboard"]
