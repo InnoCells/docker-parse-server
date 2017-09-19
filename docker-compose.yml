@@ -1,0 +1,16 @@
+version: "3.2"
+services:
+
+  parse-server:
+    image: innocells/parse-server
+    volumes:
+      - ./src/:/parse-server/src/
+    links:
+      - mongo
+    ports:
+      - "80:8080"
+
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
