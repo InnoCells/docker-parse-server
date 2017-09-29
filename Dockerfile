@@ -9,6 +9,7 @@ WORKDIR $PARSE_SERVER_HOME
 COPY index.js ./
 COPY package.json ./
 
+RUN npm install forever -g
 RUN npm install
 
 EXPOSE 8080
