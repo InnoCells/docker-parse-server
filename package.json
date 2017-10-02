@@ -4,7 +4,7 @@
   "description": "Containerized Parse Server and Parse Dashboard development and production environment",
   "main": "index.js",
   "scripts": {
-    "start": "forever -w --watchDirectory src/ index.js",
+    "start": "forever -w --watchDirectory ./server index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

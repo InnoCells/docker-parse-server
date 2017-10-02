@@ -1,10 +1,11 @@
-const express = require('express');
 const ParseServer = require('parse-server').ParseServer;
 const ParseDashboard = require('parse-dashboard');
+const express = require('express');
+const server = require('./server/index');
 
 const parseServer = new ParseServer({
   databaseURI: 'mongodb://mongo:27017/parse-server',
-  cloud: './src/cloud/main.js',
+  cloud: './server/cloud/index.js',
   appId: 'myAppId',
   masterKey: 'myMasterKey',
   serverURL: 'http://localhost/parse'
@@ -31,6 +32,8 @@ const parseDashboard = new ParseDashboard({
 const app = express();
 app.use('/parse', parseServer);
 app.use('/dashboard', parseDashboard);
+
+server(app);
 
 app.listen(8080, () => {
   console.log('Parse Server running on port 8080!');

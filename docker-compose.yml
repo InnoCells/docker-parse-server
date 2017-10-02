@@ -4,7 +4,7 @@ services:
   parse-server:
     image: innocells/parse-server
     volumes:
-      - ./src/:/parse-server/src/
+      - ./server/:/parse-server/server/
     links:
       - mongo
     ports:
