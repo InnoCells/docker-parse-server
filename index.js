@@ -3,28 +3,35 @@ const ParseDashboard = require('parse-dashboard');
 const express = require('express');
 const server = require('./server/index');
 
+const appId = process.env.PARSE_SERVER_APP_ID;
+const appName = process.env.PARSE_SERVER_APP_NAME;
+const masterKey = process.env.PARSE_SERVER_MASTER_KEY;
+const serverURL = process.env.PARSE_SERVER_URL;
+const dashboardUser = process.env.PARSE_SERVER_DASHBOARD_USER;
+const dashboardPassword = process.env.PARSE_SERVER_DASHBOARD_PASSWORD;
+
 const parseServer = new ParseServer({
   databaseURI: 'mongodb://mongo:27017/parse-server',
   cloud: './server/cloud/index.js',
-  appId: 'myAppId',
-  masterKey: 'myMasterKey',
-  serverURL: 'http://localhost/parse'
+  appId,
+  masterKey,
+  serverURL
 });
 
 const allowInsecureHTTP = true;
 const parseDashboard = new ParseDashboard({
-  'apps': [
+  apps: [
     {
-      'serverURL': 'http://localhost/parse',
-      'appId': 'myAppId',
-      'masterKey': 'myMasterKey',
-      'appName': 'MyApp'
+      serverURL,
+      appId,
+      masterKey,
+      appName
     }
   ],
-  'users': [
+  users: [
     {
-      'user': 'user',
-      'pass': 'password'
+      user: dashboardUser,
+      pass: dashboardPassword
     }
   ]
 }, allowInsecureHTTP);
