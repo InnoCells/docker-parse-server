@@ -1,4 +1,4 @@
-const ParseServer = require('parse-server').ParseServer;
+const { ParseServer } = require('parse-server');
 const ParseDashboard = require('parse-dashboard');
 const express = require('express');
 const server = require('./server/index');
