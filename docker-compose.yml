@@ -1,0 +1,36 @@
+version: "3.2"
+services:
+  https-parse-server:
+    image: steveltn/https-portal:1
+    container_name: https-parse-server
+    ports:
+      - '80:80'
+      - '443:443'
+    links:
+      - parse-server
+    restart: always
+    environment:
+      DOMAINS: 'parse-server.example.com -> http://parse-server:8080'
+      STAGE: local
+      # FORCE_RENEW: 'true'
+
+  parse-server:
+    image: innocells/parse-server
+    container_name: parse-server
+    volumes:
+      - ./server/:/parse-server/server/
+    links:
+      - mongo
+    environment:
+      - PARSE_SERVER_APP_ID
+      - PARSE_SERVER_APP_NAME
+      - PARSE_SERVER_MASTER_KEY
+      - PARSE_SERVER_URL
+      - PARSE_SERVER_DASHBOARD_USER
+      - PARSE_SERVER_DASHBOARD_PASSWORD
+
+  mongo:
+    image: mongo
+    container_name: mongo
+    ports:
+      - "27017:27017"

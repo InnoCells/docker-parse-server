@@ -1,0 +1,26 @@
+{
+  "name": "docker-parse-server",
+  "version": "1.0.0",
+  "description": "Containerized Parse Server and Parse Dashboard development and production environment",
+  "main": "index.js",
+  "scripts": {
+    "start": "forever -w --watchDirectory ./server index.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/InnoCells/docker-parse-server.git"
+  },
+  "keywords": [
+    "parse",
+    "server",
+    "dashboard"
+  ],
+  "author": "InnoCells",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.15.4",
+    "parse-dashboard": "^1.1.0",
+    "parse-server": "^2.6.2"
+  }
+}
